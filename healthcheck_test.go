@@ -114,7 +114,7 @@ func TestHandlerReturnCritical(t *testing.T) {
 	resp := httptest.NewRecorder()
 	gin.SetMode(gin.TestMode)
 	c, r := gin.CreateTestContext(resp)
-	r.GET("/test", healthcheck.Handler(deps...))
+	r.GET("/test", healthcheck.Handler("unit-test", deps...))
 	c.Request, _ = http.NewRequest(http.MethodGet, "/test", nil)
 	r.ServeHTTP(resp, c.Request)
 

@@ -30,13 +30,13 @@ var (
 )
 
 // Handler returns the health of the app as a HealthResponse object.
-func Handler(deps ...DependencyDescriptor) gin.HandlerFunc {
+func Handler(svcName string, deps ...DependencyDescriptor) gin.HandlerFunc {
 	dependencies = deps
 	return func(c *gin.Context) {
 		st := time.Now()
 
 		hb := HealthResponse{
-			Resource:    "rest_api",
+			Resource:    svcName,
 			UtcDateTime: time.Now().UTC(),
 		}
 		status, deps := checkDeps(dependencies)
